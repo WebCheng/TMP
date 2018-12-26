@@ -1,14 +1,16 @@
 <?php
-    $servername = "localhost:3306";
-    $username = "root";
-    $password = "root";
+    include 'SQLHub.php';
+    
+    $pars = array();
+    $pars[] =  '1';
+    $pars[] =  '2';
+    $pars[] =  '3';
+    $sql =   "  SELECT *
+                FROM world.city 
+                where id = '{0}'
+                or id = '{1}'
+                or id = '{2}'";
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } 
-    echo "Connected successfully";
+    $data = exeSql($sql,$pars); 
+    echo mysqli_num_rows($data);
 ?>
