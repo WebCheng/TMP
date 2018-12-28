@@ -1,16 +1,14 @@
 <?php
-    include 'SQLHub.php';
-    
-    $pars = array();
-    $pars[] =  '1';
-    $pars[] =  '2';
-    $pars[] =  '3';
-    $sql =   "  SELECT *
-                FROM world.city 
-                where id = '{0}'
-                or id = '{1}'
-                or id = '{2}'";
+    include './Core/sql.php';
+    include './Core/table.php';
+    $select_op = $_POST['select_op'];
+    if($select_op != ""){
+        $pars = array($select_op);
+        $sql =   "  SELECT NAME, DISTRICT, POPULATION
+                    FROM WORLD.CITY  ";
 
-    $data = exeSql($sql,$pars); 
-    echo mysqli_num_rows($data);
+        $data = exeSql($sql,$pars);
+        $header = array( "NAME", "DISTRICT","POPULATION");  
+        createHtmlTable($data,$header); 
+    }
 ?>
